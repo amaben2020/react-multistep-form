@@ -7,16 +7,18 @@ import viteLogo from "/vite.svg";
 function App() {
   const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string>("");
 
   const getUsers = async () => {
     try {
       setLoading(true);
-      const { data } = await getShipping("shipping");
+      const { data } = await getShipping("shippin");
       console.log(data);
       setData(data);
       setLoading(false);
     } catch (error) {
       console.log(error);
+      if (error instanceof Error) setError(error.message);
     } finally {
       setLoading(false);
     }
@@ -37,6 +39,7 @@ function App() {
         </a>
       </div>
       <p>{loading && "⏱️⏱️⏱️⏱️ LOADING...."}</p>
+      <p style={{ color: "red" }}>{error && error}</p>
       {data.map((d: any) => (
         <div>{d.title}</div>
       ))}

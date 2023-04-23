@@ -37,3 +37,23 @@ axiosClient.interceptors.request.use((req) => {
 });
 
 // Error handling
+axiosClient.interceptors.response.use(
+  (res) => {
+    console.log("response", res);
+    return res;
+  },
+  (err) => {
+    console.log("Error", err);
+    if (err.response.status === 404) {
+      throw new Error(`${err.config.url} not found for this endpoint`);
+    }
+    throw err;
+  },
+);
+
+// Automatically sets the authorization header because
+// of the request interceptor
+// const err = await axios.get('https://httpbin.org/status/404').
+//   then(() => null, err => err);
+
+// err.message; // "https://httpbin.org/status/404 not found"
