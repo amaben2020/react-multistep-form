@@ -21,6 +21,8 @@ export const Contact = () => {
     navigate("/education");
   };
 
+  console.log("watchPassword", watchPassword);
+
   return (
     <Form onSubmit={handleSubmit(saveData)}>
       <fieldset>
