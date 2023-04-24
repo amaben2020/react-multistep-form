@@ -9,3 +9,11 @@ export const Button = forwardRef(
     );
   },
 );
+
+export const CopyButton = forwardRef(({ children, ...props }, ref) => {
+  return (
+    <button ref={ref} {...props}>
+      {children}
+    </button>
+  );
+});
