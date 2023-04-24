@@ -9,7 +9,7 @@ export const Confirm = () => {
   const { handleSubmit } = useForm({ defaultValues: state });
 
   const submitData = (data) => {
-    console.info(data);
+    console.log("All the data", data);
     // Submit data to the server
   };
 

@@ -6,6 +6,7 @@ import { Confirm } from "./Steps/Confirm";
 import { Contact } from "./Steps/Contact";
 import { Education } from "./Steps/Education";
 import { Help } from "./Steps/Help";
+import { Stepper } from "./Steps/Stepper";
 import { AppProvider } from "./state";
 
 export const App = () => {
@@ -13,6 +14,7 @@ export const App = () => {
     <div className="App">
       <AppProvider>
         <Router>
+          <Stepper />
           <Routes>
             <Route path="/" element={<Contact />} />
             <Route path="/education" element={<Education />} />
