@@ -11,8 +11,6 @@ axiosClient.defaults.headers = {
 
 axiosClient.defaults.withCredentials = true;
 
-// https://masteringjs.io/tutorials/axios/interceptors
-
 //Axios interceptors are functions that Axios calls for every request
 axiosClient.interceptors.request.use((req) => {
   console.log(`${req.method} ${req.url}`);
@@ -28,8 +26,6 @@ axiosClient.interceptors.response.use((res) => {
 
 // Setting headers
 axiosClient.interceptors.request.use((req) => {
-  // `req` is the Axios request config, so you can modify
-  // the `headers`.
   req.headers.authorization = "my secret token which may be a test";
 
   req.headers["Content-Type"] = "application/json";
@@ -50,10 +46,3 @@ axiosClient.interceptors.response.use(
     throw err;
   },
 );
-
-// Automatically sets the authorization header because
-// of the request interceptor
-// const err = await axios.get('https://httpbin.org/status/404').
-//   then(() => null, err => err);
-
-// err.message; // "https://httpbin.org/status/404 not found"
