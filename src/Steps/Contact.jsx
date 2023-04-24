@@ -18,14 +18,9 @@ export const Contact = () => {
 
   const saveData = (data) => {
     setState({ ...state, ...data });
-    alert(JSON.stringify(state));
+
     navigate("/education");
   };
-
-  console.log("watchPassword", watchPassword);
-
-  // copy password button beside password
-  // https://developer.mozilla.org/en-US/docs/Web/API/Navigator/clipboard
 
   const ref = useRef(null);
 
@@ -39,20 +34,17 @@ export const Contact = () => {
 
   const [isCopied, setIsCopied] = useState(false);
 
-  // onClick handler function for the copy button
-  const handleCopyClick = () => {
-    // Asynchronously call copyTextToClipboard
-    copyTextToClipboard(state?.password)
-      .then(() => {
-        // If successful, update the isCopied state value
-        setIsCopied(true);
-        setTimeout(() => {
-          setIsCopied(false);
-        }, 1500);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const handleCopyClick = async () => {
+    // watch simply allows you keep track of an input state
+    try {
+      await copyTextToClipboard(watch("password"));
+      setIsCopied(true);
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 1500);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
