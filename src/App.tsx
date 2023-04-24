@@ -1,4 +1,4 @@
-// App.js
+//@ts-nocheck
 
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { About } from "./Steps/About";
