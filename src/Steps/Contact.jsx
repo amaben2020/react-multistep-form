@@ -1,18 +1,21 @@
 // Steps/Contact.js
 
+// Research useForm context methods
+
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import useFormPersist from "react-hook-form-persist";
 import { useNavigate } from "react-router-dom";
 import { Button, Field, Form, Input } from "../Forms";
 import { CopyButton } from "../Forms/Button";
 import { useAppState } from "../state";
-
 export const Contact = () => {
   const [state, setState] = useAppState();
-  const { handleSubmit, register, watch, formState } = useForm({
-    defaultValues: state,
-    mode: "onSubmit",
-  });
+  const { handleSubmit, register, watch, formState, setValue, getValues } =
+    useForm({
+      defaultValues: state,
+      mode: "onSubmit",
+    });
   const watchPassword = watch("password");
   const navigate = useNavigate();
 
@@ -21,6 +24,13 @@ export const Contact = () => {
 
     navigate("/education");
   };
+
+  useFormPersist("storageKey", {
+    watch,
+    setValue,
+    storage: window.localStorage, // default window.sessionStorage
+    exclude: ["baz"],
+  });
 
   const ref = useRef(null);
 
@@ -46,6 +56,8 @@ export const Contact = () => {
       console.log(error);
     }
   };
+
+  console.log("email", watch("email"));
 
   return (
     <Form onSubmit={handleSubmit(saveData)}>

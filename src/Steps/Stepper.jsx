@@ -9,22 +9,22 @@ export const Stepper = () => {
     );
   };
 
+  const links = [
+    { url: "/", title: "Contact" },
+    { url: "/education", title: "Education" },
+    { title: "About", url: "/about" },
+    { title: "Confirm", url: "/confirm" },
+  ];
+
   return (
     <nav className="stepper navbar navbar-expand-lg">
       <div className="collapse navbar-collapse">
         <ol className="navbar-nav">
-          <li className="step nav-item">
-            <span className={getLinkClass("/")}>Contact</span>
-          </li>
-          <li className="step nav-item">
-            <span className={getLinkClass("/education")}>Education</span>
-          </li>
-          <li className="step nav-item">
-            <span className={getLinkClass("/about")}>About</span>
-          </li>
-          <li className="step nav-item">
-            <span className={getLinkClass("/confirm")}>Confirm</span>
-          </li>
+          {links.map((l) => (
+            <li className="step nav-item">
+              <span className={getLinkClass(l.url)}>{l.title}</span>
+            </li>
+          ))}
         </ol>
       </div>
     </nav>
