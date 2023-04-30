@@ -8,14 +8,18 @@ import useFormPersist from "react-hook-form-persist";
 import { useNavigate } from "react-router-dom";
 import { Button, Field, Form, Input } from "../Forms";
 import { CopyButton } from "../Forms/Button";
+import useLocalstorage from "../hooks/use-local-storage";
 import { useAppState } from "../state";
 export const Contact = () => {
   const [state, setState] = useAppState();
-  const { handleSubmit, register, watch, formState, setValue, getValues } =
-    useForm({
-      defaultValues: state,
-      mode: "onSubmit",
-    });
+
+  const { saveDataToLocalStorage } = useLocalstorage("user-data", state);
+
+  const { handleSubmit, register, watch, formState, setValue } = useForm({
+    defaultValues: state,
+    mode: "onSubmit",
+  });
+
   const watchPassword = watch("password");
   const navigate = useNavigate();
 
@@ -24,6 +28,7 @@ export const Contact = () => {
     setState({ ...state, ...data });
 
     navigate("/education");
+    saveDataToLocalStorage();
   };
 
   useFormPersist("storageKey", {

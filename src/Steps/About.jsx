@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Field, Form } from "../Forms";
+import useLocalstorage from "../hooks/use-local-storage";
 import { useAppState } from "../state";
 
 export const About = () => {
@@ -10,9 +11,11 @@ export const About = () => {
   const { handleSubmit, register } = useForm({ defaultValues: state });
   const navigate = useNavigate();
 
+  const { saveDataToLocalStorage } = useLocalstorage("user-data", state);
   const saveData = (data) => {
     setState({ ...state, ...data });
     navigate("/confirm");
+    saveDataToLocalStorage();
   };
 
   return (

@@ -2,15 +2,22 @@
 
 import { useForm } from "react-hook-form";
 import { Button, Form, Section, SectionRow } from "../Forms";
+import useLocalstorage from "../hooks/use-local-storage";
 import { useAppState } from "../state";
 
 export const Confirm = () => {
   const [state] = useAppState();
   const { handleSubmit } = useForm({ defaultValues: state });
 
+  const { userData, clear } = useLocalstorage("user-data", state);
+
+  console.log("user data", userData);
+
   const submitData = (data) => {
     console.log("All the data", data);
     // Submit data to the server
+
+    clear();
   };
 
   return (
@@ -43,7 +50,7 @@ export const Confirm = () => {
       <Section title="About" url="/about">
         <SectionRow>
           <div>About me</div>
-          <div>{state.about}</div>
+          <div>{userData?.about}</div>
         </SectionRow>
       </Section>
       <div className="d-flex justify-content-start">
