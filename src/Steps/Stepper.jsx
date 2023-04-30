@@ -3,11 +3,8 @@ import { useLocation } from "react-router-dom";
 export const Stepper = () => {
   const location = useLocation();
 
-  const getLinkClass = (path) => {
-    return (
-      "nav-link disabled " + (path === location.pathname ? "active" : undefined)
-    );
-  };
+  const getLinkClass = (path) =>
+    "nav-link disabled " + (path === location.pathname ? "active" : undefined);
 
   const links = [
     { url: "/", title: "Contact" },

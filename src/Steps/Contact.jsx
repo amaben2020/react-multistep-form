@@ -20,6 +20,7 @@ export const Contact = () => {
   const navigate = useNavigate();
 
   const saveData = (data) => {
+    console.log("DATA", data);
     setState({ ...state, ...data });
 
     navigate("/education");
